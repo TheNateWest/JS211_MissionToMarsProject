@@ -9,11 +9,70 @@ const jobTypes = {
   programmer: 'Any Ship!'
 };
 
-// Your code will go here
+// Build a class for CrewMember
+  // should have a name, a job, a specialSkill and ship upon instantiation
+  // can enter a ship
 
+class CrewMember {
+  constructor(name, job, specialSkill, ship){
+    this.name = name;
+    this.job = job;
+    this.specialSkill = specialSkill;
+    this.ship = ship;
+  }
 
+  enterShip = (vessel) => {
+    this.ship = vessel
 
+    vessel.crew.push(this)
+  }
 
+}
+// Build a class for Ship.
+  // should have a name, a type, an ability and an empty crew upon instantiation
+  // can return a mission statement correctly
+
+  // assert.equal(mav.crew.lenth, 0);
+  // should a ship have more than one crew member?
+  // what data type will let me hold multiple crew members?
+
+class Ship {
+  constructor(name, type, ability, ) {
+    this.name = name;
+    this.type = type;
+    this.ability = ability;
+    this.crew = [];
+
+  }
+  
+missionStatement = () => {
+// missionStatement = ability
+// if i don't have crew, then I can't perform a mission yet.
+if (this.crew.length === 0) {
+  let noMission = "Can't perform a mission yet."
+  return noMission;
+} else {
+  let mission = this.ability;
+  return mission;
+}
+
+}
+
+}
+
+let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
+
+// console.log(mav.name + " , " + mav.type + " , " + mav.ability + " , " + mav.crew)
+console.log(mav);
+
+const crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
+
+let rick = crewMember1;
+console.log(rick)
+
+// crewMember1.enterShip(mav);
+
+      console.log(crewMember1)
 
 
 
@@ -45,7 +104,7 @@ if (typeof describe === 'function'){
 
   describe('Ship', function(){
     it('should have a name, a type, an ability and an empty crew upon instantiation', function(){
-      let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
+      let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit'); //Mars Ascent Vehicle, 'MAV', 'Ascend into low orbit, [] <-- no crew
       assert.equal(mav.name, 'Mars Ascent Vehicle');
       assert.equal(mav.type, 'MAV');
       assert.equal(mav.ability, 'Ascend into low orbit');
@@ -53,11 +112,16 @@ if (typeof describe === 'function'){
     });
 
     it('can return a mission statement correctly', function(){
-      let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
-      const crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
+
+      let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit'); //Mars Ascent Vehicle, 'MAV', 'Ascend into low orbit, [] <-- no crew
+      const crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry'); //'Rick Martinez', 'pilot', 'chemistry', null or undefined <-- no ship
+
       let hermes = new Ship('Hermes', 'Main Ship', 'Interplanetary Space Travel');
       const crewMember2 = new CrewMember('Commander Lewis', 'commander', 'geology');
-      assert.equal(mav.missionStatement(), "Can't perform a mission yet.");
+
+      // at this point, I have 2 ships and 2 crewMembers, but I haven't added any crew to the ships.
+
+      assert.equal(mav.missionStatement(), "Can't perform a mission yet."); // if i don't have crew, then I can't perform a mission yet.
       assert.equal(hermes.missionStatement(), "Can't perform a mission yet.");
 
       crewMember1.enterShip(mav);
